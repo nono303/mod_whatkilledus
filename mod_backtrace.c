@@ -477,8 +477,8 @@ static int backtrace_handler(request_rec *r)
 
 static void load_symbols(apr_pool_t *p, server_rec *s)
 {
-    const char *bindir = ap_server_root_relative(p, "bin");
-    const char *modulesdir = ap_server_root_relative(p, "modules");
+    const char *bindir = ap_runtime_dir_relative(p, "bin");
+    const char *modulesdir = ap_runtime_dir_relative(p, "modules");
     const char *symbolpath = getenv("_NT_ALT_SYMBOL_PATH");
     apr_finfo_t finfo;
 
@@ -503,11 +503,11 @@ static void load_symbols(apr_pool_t *p, server_rec *s)
                      LOG_PREFIX "Symbol path set to %s", symbolpath);
     }
 
-    if (apr_stat(&finfo, ap_server_root_relative(p, "bin/httpd.pdb"), APR_FINFO_MIN, p)
+    if (apr_stat(&finfo, ap_runtime_dir_relative(p, "bin/httpd.pdb"), APR_FINFO_MIN, p)
         != APR_SUCCESS) {
         ap_log_error(APLOG_MARK, APLOG_WARNING, 0, s,
-                     LOG_PREFIX "Symbol files are not present in the server bin directory; "
-                     "backtraces may not have symbols");
+                     LOG_PREFIX "Symbol files are not present in '%s' directory; "
+                     "backtraces may not have symbols", ap_runtime_dir_relative(p, "bin/httpd.pdb"));
     }
 }
 

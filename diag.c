@@ -15,7 +15,6 @@
 
 #if _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS
-#define DIAG_BITS_64
 #endif
 
 #include "diagplat.h"

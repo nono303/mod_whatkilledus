@@ -886,7 +886,7 @@ static int banner(server_rec *s)
      * for this module.
      */
     ap_log_error(APLOG_MARK, APLOG_NOTICE, 0, s,
-                 "mod_whatkilledus v%s from http://emptyhammock.com/",
+                 "mod_whatkilledus v%s,
                  DIAG_MOD_VERSION);
     return 1;
 }
